@@ -1,33 +1,16 @@
-# Personal Finance Hub
+# React + Vite
 
-A single-page, responsive web app for tracking your personal finances locally in the browser. Data is stored in `localStorage` only on your machine.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- **Overview**: See total net worth, this months income, and this months expenses at a glance.
-- **Net Worth**: Add assets and liabilities; net worth is calculated automatically.
-- **Portfolio**: Track holdings (stocks, mutual funds, ETFs, crypto, etc.) with allocation by type and total value.
-- **Monthly Statements**: Log income and expenses as transactions, filter by month, and see summary (income, expenses, savings, savings rate).
-- **Weekly Statements**: Aggregated weekly income, expenses, and net amount derived from your transactions.
-- **Settings**:
-  - Change display currency for formatting.
-  - Export all data to a JSON backup file.
-  - Import data from a previous backup.
-  - Optional goals for net worth and monthly savings, with a simple progress summary.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Running the app
+## React Compiler
 
-This is a static site: open `index.html` in a browser.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-On Windows (PowerShell), you can also serve it locally with a simple HTTP server if you prefer:
+## Expanding the ESLint configuration
 
-```powershell
-cd "c:\Users\adars\Adi personal\Projects\Prototype 1"
-python -m http.server 8000
-```
-
-Then open: http://localhost:8000/
-
-## Data and privacy
-
-All information is stored only in your browser `localStorage` under keys starting with `pfh_`. To reset everything, clear site data for this origin in your browser or open DevTools and clear `localStorage` entries.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
