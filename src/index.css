@@ -213,14 +213,7 @@ body {
   color: var(--text-dark);
 }
 
-.user-avatar img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
+
 
 /* Page Content Styling to match image */
 .page-header {
