@@ -33,19 +33,13 @@ const Sidebar = () => {
     return (
         <aside className="sidebar">
             <div className="sidebar-header">
-                <div className="logo-icon">
-                    <Wallet size={24} />
+                <div className="logo-icon text-primary">
+                    <Wallet size={28} color="#8b5cf6" />
                 </div>
                 <span className="logo-text">Portfolio</span>
-                <button className="sidebar-collapse-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <line x1="9" y1="3" x2="9" y2="21" />
-                    </svg>
-                </button>
             </div>
 
-            <div className="sidebar-content">
+            <div className="sidebar-content" style={{ flex: 1, overflowY: 'auto' }}>
                 <div className="sidebar-section">
                     <h4 className="section-title">Main</h4>
                     <nav className="sidebar-nav">
