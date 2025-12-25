@@ -4,31 +4,7 @@ import { Bell, Search, User } from 'lucide-react';
 const Topbar = () => {
     return (
         <header className="topbar">
-            {/* Search Bar */}
-            <div className="search-container" style={{
-                background: 'rgba(255,255,255,0.05)',
-                padding: '8px 16px',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                width: '300px',
-                border: '1px solid rgba(255,255,255,0.1)'
-            }}>
-                <Search size={18} className="text-muted" color="#94a3b8" />
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    style={{
-                        background: 'transparent',
-                        border: 'none',
-                        color: 'white',
-                        outline: 'none',
-                        width: '100%',
-                        fontSize: '0.9rem'
-                    }}
-                />
-            </div>
+            {/* Search Bar Removed */}
 
             <div className="topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                 <button className="icon-btn" style={{

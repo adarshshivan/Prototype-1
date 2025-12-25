@@ -9,7 +9,7 @@ function App() {
       <div className="content-container">
         <div className="page-header">
           <h1 className="page-title">Dashboard</h1>
-          <p className="page-subtitle">Welcome back! Here's your creative space.</p>
+          <p className="page-subtitle">Welcome back! This is your Portfolio Dashboard.</p>
         </div>
 
         <div className="dashboard-grid">

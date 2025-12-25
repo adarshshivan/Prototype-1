@@ -15,7 +15,7 @@ import '../index.css';
 
 const Sidebar = () => {
     const menuItems = [
-        { label: 'Menu 1', icon: <LayoutDashboard size={20} />, active: true },
+        { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: true },
         { label: 'Menu 2', icon: <FileText size={20} /> },
         { label: 'Menu 3', icon: <Briefcase size={20} /> },
     ];
