@@ -1,12 +1,15 @@
 import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
 
+import ThemeToggle from './ThemeToggle';
+
 const Topbar = () => {
     return (
         <header className="topbar">
             {/* Search Bar Removed */}
 
             <div className="topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <ThemeToggle />
                 <button className="icon-btn" style={{
                     position: 'relative',
                     background: 'none',

@@ -36,6 +36,35 @@
   --radius-sm: 8px;
 
   --font-main: 'Outfit', sans-serif;
+  /* Transition settings */
+  --transition-speed: 0.3s;
+  --transition-ease: ease-in-out;
+}
+
+[data-theme="light"] {
+  /* Core Colors - Light Theme */
+  --bg-dark: #f8fafc; /* Slate 50 */
+  --bg-card: #ffffff; /* White */
+  --bg-sidebar: rgba(255, 255, 255, 0.8);
+  
+  --primary: #7c3aed; /* Violet 600 */
+  --primary-glow: rgba(124, 58, 237, 0.2);
+  --accent: #db2777; /* Pink 600 */
+
+  /* Text */
+  --text-primary: #1e293b; /* Slate 800 */
+  --text-secondary: #64748b; /* Slate 500 */
+  --text-muted: #94a3b8; /* Slate 400 */
+
+  /* Borders & Glass */
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --surface-glass: rgba(255, 255, 255, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.5);
+}
+
+body {
+  transition: background-color var(--transition-speed) var(--transition-ease),
+              color var(--transition-speed) var(--transition-ease);
 }
 
 * {
