@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
+import { motion } from 'framer-motion';
 
 const DashboardLayout = ({ children }) => {
     return (
@@ -8,9 +9,14 @@ const DashboardLayout = ({ children }) => {
             <Sidebar />
             <div className="main-wrapper">
                 <Topbar />
-                <main className="main-content-area">
+                <motion.main
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="main-content-area"
+                >
                     {children}
-                </main>
+                </motion.main>
             </div>
         </div>
     );
