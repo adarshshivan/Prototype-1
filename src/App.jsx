@@ -68,7 +68,13 @@ function App() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
-            <GlassCard key={stat.title} delay={index * 0.1}>
+            <GlassCard
+              key={stat.title}
+              delay={index * 0.1}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0 }}
+            >
               <div className="flex justify-between items-start mb-4">
                 <div className="p-3 rounded-xl bg-white/5 text-white" style={{ color: stat.color }}>
                   <stat.icon size={24} />
@@ -150,8 +156,8 @@ function App() {
                     <div className="text-xs text-[var(--text-muted)]">{item.type}</div>
                   </div>
                   <div className={`text-xs px-2 py-1 rounded-lg border ${item.status === 'Completed' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                      item.status === 'In Progress' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
-                        'bg-orange-500/10 text-orange-400 border-orange-500/20'
+                    item.status === 'In Progress' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                      'bg-orange-500/10 text-orange-400 border-orange-500/20'
                     }`}>
                     {item.status}
                   </div>
