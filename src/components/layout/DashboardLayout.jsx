@@ -1,5 +1,4 @@
 import Sidebar from './Sidebar'
-import Header from './Header'
 
 const DashboardLayout = ({ children }) => {
     return (
@@ -13,7 +12,6 @@ const DashboardLayout = ({ children }) => {
             <Sidebar />
 
             <main className="flex-1 md:pl-64 flex flex-col relative z-20">
-                <Header />
                 <div className="flex-1 p-6 md:p-8 overflow-y-auto">
                     {children}
                 </div>
