@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { LayoutDashboard, Folder, Users, Settings, PieChart, Menu } from 'lucide-react'
+import { LayoutDashboard, Bitcoin, Users, Settings, PieChart, Menu } from 'lucide-react'
 import { useState } from 'react'
 
 const Sidebar = () => {
@@ -7,7 +7,7 @@ const Sidebar = () => {
 
     const menuItems = [
         { icon: LayoutDashboard, label: 'Dashboard' },
-        { icon: Folder, label: 'Projects' },
+        { icon: Bitcoin, label: 'Crypto' },
         { icon: Users, label: 'Team' },
         { icon: PieChart, label: 'Analytics' },
         { icon: Settings, label: 'Settings' },
