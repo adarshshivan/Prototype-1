@@ -1,16 +1,84 @@
-# React + Vite
+# Modern Dashboard Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A visually stunning, responsive dashboard application built with React 19 and Vite. This project showcases a modern UI/UX design featuring "Deep Glassmorphism" aesthetics, dynamic animations, and interactive data visualization components.
 
-Currently, two official plugins are available:
+![Project Preview](https://via.placeholder.com/800x400?text=Dashboard+Preview)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Key Features
 
-## React Compiler
+*   **Modern Glassmorphism Design**: specific aesthetic choice with translucent layers, vivid gradients, and refined typography.
+*   **Interactive Dashboard**: Real-time feel with animated statistics cards and analytics charts.
+*   **Responsive Layout**: Fully responsive `DashboardLayout` that adapts seamlessly to desktop and mobile screens.
+*   **Dynamic Animations**: Smooth entrance and interaction animations powered by `framer-motion`.
+    *   Staggered list animations.
+    *   Hover effects on cards and buttons.
+    *   Animated counter support for statistics.
+*   **Component Library**: Custom reusable UI components including `GlassCard` and `NeoButton`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+*   **Framework**: [React 19](https://react.dev/)
+*   **Build Tool**: [Vite](https://vitejs.dev/)
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+*   **Icons**: [Lucide React](https://lucide.dev/)
+*   **Linting**: ESLint
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Getting Started
+
+Follow these steps to get the project running on your local machine.
+
+### Prerequisites
+
+*   [Node.js](https://nodejs.org/) (Latest LTS version recommended)
+*   npm (comes with Node.js)
+
+### Installation
+
+1.  **Clone the repository** (or download source):
+    ```bash
+    git clone <repository-url>
+    cd <project-folder>
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+### Running Locally
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal).
+
+## 🏗️ Building for Production
+
+To create a production-ready build:
+
+```bash
+npm run build
+```
+
+This will generate optimized static assets in the `dist` directory.
+
+## 📁 Project Structure
+
+```
+src/
+├── components/         # Reusable UI components
+│   ├── layout/         # Layout components (DashboardLayout, Sidebar, etc.)
+│   └── ui/             # Basic UI elements (GlassCard, NeoButton, etc.)
+├── assets/             # Static assets (images, icons)
+├── App.jsx             # Main application component & Dashboard logic
+├── main.jsx            # Application entry point
+└── index.css           # Global styles & Tailwind directives
+```
+
+## 📄 License
+
+This project is licensed under the MIT License.
