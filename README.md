@@ -1,19 +1,29 @@
 # Modern Dashboard Portfolio
 
-A visually stunning, responsive dashboard application built with React 19 and Vite. This project showcases a modern UI/UX design featuring "Deep Glassmorphism" aesthetics, dynamic animations, and interactive data visualization components.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
+
+A visually stunning, responsive dashboard application built with **React 19** and **Vite**. This project showcases a modern UI/UX design featuring "Deep Glassmorphism" aesthetics, dynamic animations, and interactive data visualization components.
 
 ![Project Preview](https://via.placeholder.com/800x400?text=Dashboard+Preview)
 
+> [!TIP]
+> **Live Demo**: [Comming Soon](#) | **Repo**: [View Source](https://github.com/adarshshivan/Prototype-1)
+
+---
+
 ## 🚀 Key Features
 
-*   **Modern Glassmorphism Design**: specific aesthetic choice with translucent layers, vivid gradients, and refined typography.
-*   **Interactive Dashboard**: Real-time feel with animated statistics cards and analytics charts.
-*   **Responsive Layout**: Fully responsive `DashboardLayout` that adapts seamlessly to desktop and mobile screens.
-*   **Dynamic Animations**: Smooth entrance and interaction animations powered by `framer-motion`.
-    *   Staggered list animations.
-    *   Hover effects on cards and buttons.
-    *   Animated counter support for statistics.
-*   **Component Library**: Custom reusable UI components including `GlassCard` and `NeoButton`.
+| Feature | Description |
+| :--- | :--- |
+| **✨ Modern Glassmorphism** | Aesthetic choice with translucent layers, vivid gradients, and refined typography. |
+| **📊 Interactive Dashboard** | Real-time feel with animated statistics cards and analytics charts. |
+| **📱 Fully Responsive** | `DashboardLayout` adapts seamlessly to desktop, tablet, and mobile screens. |
+| **⚡ Dynamic Animations** | Powered by `framer-motion`: staggered lists, hover effects, and animated counters. |
+| **🧩 Component Library** | Custom reusable UI components including `GlassCard` and `NeoButton`. |
 
 ## 🛠️ Tech Stack
 
@@ -35,10 +45,10 @@ Follow these steps to get the project running on your local machine.
 
 ### Installation
 
-1.  **Clone the repository** (or download source):
+1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
-    cd <project-folder>
+    cd Prototype-1
     ```
 
 2.  **Install dependencies**:
@@ -54,31 +64,44 @@ Start the development server:
 npm run dev
 ```
 
-Open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal).
+Open your browser and navigate to `http://localhost:5173`.
 
-## 🏗️ Building for Production
+## 📜 Scripts
 
-To create a production-ready build:
+| Script | Command | Description |
+| :--- | :--- | :--- |
+| `dev` | `npm run dev` | Starts the development server. |
+| `build` | `npm run build` | Builds the app for production to the `dist` folder. |
+| `lint` | `npm run lint` | Runs ESLint to check for code quality issues. |
+| `preview` | `npm run preview` | Locally preview the production build. |
+
+## 🏗️ Project Structure
 
 ```bash
-npm run build
-```
-
-This will generate optimized static assets in the `dist` directory.
-
-## 📁 Project Structure
-
-```
 src/
 ├── components/         # Reusable UI components
-│   ├── layout/         # Layout components (DashboardLayout, Sidebar, etc.)
-│   └── ui/             # Basic UI elements (GlassCard, NeoButton, etc.)
+│   ├── layout/         # Layout components (DashboardLayout, Sidebar)
+│   └── ui/             # Basic UI elements (GlassCard, NeoButton)
 ├── assets/             # Static assets (images, icons)
 ├── App.jsx             # Main application component & Dashboard logic
 ├── main.jsx            # Application entry point
 └── index.css           # Global styles & Tailwind directives
 ```
 
+## 🎨 Customization
+
+To customize the color palette or fonts, modify the `tailwind.config.js` file. The glassmorphism effects are primarily defined in `index.css` using utility classes and custom CSS variables.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
