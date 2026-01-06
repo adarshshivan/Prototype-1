@@ -7,12 +7,6 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
 A visually stunning, responsive dashboard application built with **React 19** and **Vite**. This project showcases a modern UI/UX design featuring "Deep Glassmorphism" aesthetics, dynamic animations, and interactive data visualization components.
-
-![Project Preview](https://via.placeholder.com/800x400?text=Dashboard+Preview)
-
-> [!TIP]
-> **Live Demo**: [Comming Soon](#) | **Repo**: [View Source](https://github.com/adarshshivan/Prototype-1)
-
 ---
 
 ## 🚀 Key Features
@@ -101,7 +95,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4.  Push to the branch (`git push origin feature/AmazingFeature`)
 5.  Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
