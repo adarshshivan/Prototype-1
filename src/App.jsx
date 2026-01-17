@@ -92,7 +92,7 @@ function App() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
           {/* Analytics Chart Section */}
-          <GlassCard className="min-h-[400px] flex flex-col" delay={0.4}>
+          <GlassCard className="lg:col-span-3 min-h-[400px] flex flex-col" delay={0.4}>
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h3 className="text-xl font-bold text-white">Analytics Overview</h3>
@@ -106,20 +106,22 @@ function App() {
             </div>
 
             {/* Dummy Chart Visualization */}
-            <div className="flex-1 w-full flex items-end justify-between gap-2 px-4 pb-4">
-              {[40, 65, 45, 80, 55, 90, 70, 85, 60, 75, 50, 95].map((h, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ height: 0 }}
-                  whileInView={{ height: `${h}%` }}
-                  transition={{ duration: 1, delay: 0.5 + (i * 0.05), type: 'spring' }}
-                  className="w-full bg-gradient-to-t from-[var(--primary)]/20 to-[var(--primary)] rounded-t-lg relative group"
-                >
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 px-2 py-1 rounded text-xs text-white pointer-events-none">
-                    {h}%
-                  </div>
-                </motion.div>
-              ))}
+            <div className="flex-1 w-full overflow-x-auto px-4 pb-4">
+              <div className="flex items-end gap-2 min-w-[520px]">
+                {[40, 65, 45, 80, 55, 90, 70, 85, 60, 75, 50, 95].map((h, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${h}%` }}
+                    transition={{ duration: 1, delay: 0.5 + (i * 0.05), type: 'spring' }}
+                    className="flex-none w-6 sm:w-8 md:w-10 bg-gradient-to-t from-[var(--primary)]/20 to-[var(--primary)] rounded-t-lg relative group"
+                  >
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 px-2 py-1 rounded text-xs text-white pointer-events-none">
+                      {h}%
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </GlassCard>
 
