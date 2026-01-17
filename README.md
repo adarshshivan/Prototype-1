@@ -4,15 +4,8 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
 A visually stunning, responsive dashboard application built with **React 19** and **Vite**. This project showcases a modern UI/UX design featuring "Deep Glassmorphism" aesthetics, dynamic animations, and interactive data visualization components.
-
-![Project Preview](https://via.placeholder.com/800x400?text=Dashboard+Preview)
-
-> [!TIP]
-> **Live Demo**: [Comming Soon](#) | **Repo**: [View Source](https://github.com/adarshshivan/Prototype-1)
-
 ---
 
 ## 🚀 Key Features
@@ -75,33 +68,8 @@ Open your browser and navigate to `http://localhost:5173`.
 | `lint` | `npm run lint` | Runs ESLint to check for code quality issues. |
 | `preview` | `npm run preview` | Locally preview the production build. |
 
-## 🏗️ Project Structure
-
-```bash
-src/
-├── components/         # Reusable UI components
-│   ├── layout/         # Layout components (DashboardLayout, Sidebar)
-│   └── ui/             # Basic UI elements (GlassCard, NeoButton)
-├── assets/             # Static assets (images, icons)
-├── App.jsx             # Main application component & Dashboard logic
-├── main.jsx            # Application entry point
-└── index.css           # Global styles & Tailwind directives
-```
-
 ## 🎨 Customization
 
 To customize the color palette or fonts, modify the `tailwind.config.js` file. The glassmorphism effects are primarily defined in `index.css` using utility classes and custom CSS variables.
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1.  Fork the project
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
