@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import DashboardLayout from './components/layout/DashboardLayout'
 import GlassCard from './components/ui/GlassCard'
 import NeoButton from './components/ui/NeoButton'
-import { FileText, Briefcase, Users, Folder, Plus, MoreVertical, TrendingUp, ArrowRight, Activity } from 'lucide-react'
+import { FileText, Briefcase, Users, Folder, Plus, TrendingUp } from 'lucide-react'
 
 function App() {
   const containerVariants = {
@@ -27,11 +27,7 @@ function App() {
     { title: 'FOLDERS', value: '8', icon: Folder, color: '#fb923c', trend: '+5%' },
   ]
 
-  const recentActivity = [
-    { name: 'Project Requirements.pdf', type: 'Documentation', date: 'Oct 24, 2023', status: 'In Progress', icon: FileText, color: '#60a5fa' },
-    { name: 'Marketing Campaign', type: 'Marketing', date: 'Oct 22, 2023', status: 'Completed', icon: Briefcase, color: '#c084fc' },
-    { name: 'Team Meeting Notes', type: 'Internal', date: 'Oct 20, 2023', status: 'Review', icon: Users, color: '#f472b6' },
-  ]
+  
 
   return (
     <DashboardLayout>
@@ -96,7 +92,7 @@ function App() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
           {/* Analytics Chart Section */}
-          <GlassCard className="lg:col-span-2 min-h-[400px] flex flex-col" delay={0.4}>
+          <GlassCard className="min-h-[400px] flex flex-col" delay={0.4}>
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h3 className="text-xl font-bold text-white">Analytics Overview</h3>
@@ -127,51 +123,7 @@ function App() {
             </div>
           </GlassCard>
 
-          {/* Recent Activity */}
-          <GlassCard delay={0.5}>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-white">Recent Activity</h3>
-              <button className="text-[var(--primary)] hover:text-white transition-colors">
-                <ArrowRight size={20} />
-              </button>
-            </div>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              className="space-y-4"
-            >
-              {recentActivity.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemVariants}
-                  className="group flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5"
-                >
-                  <div className="p-3 rounded-xl bg-white/5 group-hover:bg-white/10 transition-colors" style={{ color: item.color }}>
-                    <item.icon size={20} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-white text-sm">{item.name}</div>
-                    <div className="text-xs text-[var(--text-muted)]">{item.type}</div>
-                  </div>
-                  <div className={`text-xs px-2 py-1 rounded-lg border ${item.status === 'Completed' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                    item.status === 'In Progress' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
-                      'bg-orange-500/10 text-orange-400 border-orange-500/20'
-                    }`}>
-                    {item.status}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <div className="mt-6 pt-6 border-t border-white/10 text-center">
-              <button className="text-sm text-[var(--text-muted)] hover:text-white transition-colors flex items-center justify-center gap-2 mx-auto">
-                <Activity size={16} />
-                View All Activity
-              </button>
-            </div>
-          </GlassCard>
+          
 
         </div>
       </div>
