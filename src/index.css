@@ -6,11 +6,14 @@
 
 
 :root {
-  /* Neon Glass Palette */
+  /* Neon Glass Palette - Dark is default */
   --bg-dark: #030014;
   --bg-card: rgba(17, 25, 40, 0.75);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.05);
+
+  /* Semantic background so we can swap per theme */
+  --bg-body: #030014;
 
   /* Accent Colors */
   --primary: #9d4edd;
@@ -35,6 +38,34 @@
   /* Animation */
   --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --theme-transition:
+    background-color 0.5s var(--ease-smooth),
+    color 0.5s var(--ease-smooth),
+    border-color 0.5s var(--ease-smooth),
+    background-image 0.7s var(--ease-smooth);
+}
+
+/* Light theme overrides */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-body: #f4f5fb;
+  --bg-dark: #f4f5fb;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(15, 23, 42, 0.06);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+
+  --primary: #7c3aed;
+  --primary-glow: rgba(124, 58, 237, 0.45);
+  --secondary: #06b6d4;
+  --secondary-glow: rgba(6, 182, 212, 0.4);
+  --accent-pink: #db2777;
+  --accent-yellow: #facc15;
+
+  --text-main: #020617;
+  --text-muted: #64748b;
+  --text-dim: #9ca3af;
 }
 
 * {
@@ -45,7 +76,7 @@
 
 body {
   font-family: 'Outfit', sans-serif;
-  background-color: var(--bg-dark);
+  background-color: var(--bg-body);
   background-image:
     radial-gradient(circle at 15% 50%, rgba(157, 78, 221, 0.08) 0%, transparent 25%),
     radial-gradient(circle at 85% 30%, rgba(0, 245, 212, 0.08) 0%, transparent 25%);
@@ -53,6 +84,13 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: var(--theme-transition);
+}
+
+:root[data-theme='light'] body {
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 30%),
+    radial-gradient(circle at 90% 60%, rgba(6, 182, 212, 0.16) 0%, transparent 35%);
 }
 
 /* Custom Scrollbar */
@@ -79,7 +117,8 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.18);
+  transition: var(--theme-transition), box-shadow 0.5s var(--ease-smooth), transform 0.2s var(--ease-smooth);
 }
 
 .text-gradient {
