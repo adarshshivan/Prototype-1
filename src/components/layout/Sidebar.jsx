@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { LayoutDashboard, Bitcoin, Users, Settings, PieChart, Menu } from 'lucide-react'
 import { useState } from 'react'
+import ThemeToggle from '../ui/ThemeToggle'
 
 const Sidebar = () => {
     const [active, setActive] = useState('Dashboard')
@@ -56,14 +57,21 @@ const Sidebar = () => {
                 ))}
             </nav>
 
-            <div className="p-4 m-4 rounded-2xl bg-white/5 border border-white/5">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/20">
-                        A
-                    </div>
-                    <div className="flex-1 overflow-hidden">
-                        <h4 className="text-sm font-semibold truncate text-white">Adarsh</h4>
-                        <p className="text-xs text-[var(--text-muted)] truncate">Pro Member</p>
+            <div className="mt-auto px-4 pb-6 space-y-4">
+                <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                    <span>Theme</span>
+                    <ThemeToggle />
+                </div>
+
+                <div className="rounded-2xl bg-white/5 border border-white/5 p-4">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/20">
+                            A
+                        </div>
+                        <div className="flex-1 overflow-hidden">
+                            <h4 className="text-sm font-semibold truncate text-white">Adarsh</h4>
+                            <p className="text-xs text-[var(--text-muted)] truncate">Pro Member</p>
+                        </div>
                     </div>
                 </div>
             </div>
