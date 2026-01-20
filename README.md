@@ -41,7 +41,7 @@ Follow these steps to get the project running on your local machine.
 1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
-    cd Prototype-1
+    cd "Prototype 1"
     ```
 
 2.  **Install dependencies**:
@@ -67,6 +67,19 @@ Open your browser and navigate to `http://localhost:5173`.
 | `build` | `npm run build` | Builds the app for production to the `dist` folder. |
 | `lint` | `npm run lint` | Runs ESLint to check for code quality issues. |
 | `preview` | `npm run preview` | Locally preview the production build. |
+
+## 📂 Project Structure
+
+The core app lives in the `src` directory:
+
+- `src/main.jsx` – app entry point and React bootstrap.
+- `src/App.jsx` – top-level layout and routing surface.
+- `src/components/layout` – reusable layout pieces like `DashboardLayout` and `Sidebar`.
+- `src/components/ui` – shared UI elements such as `GlassCard`, `NeoButton`, and `ThemeToggle`.
+- `src/context/ThemeContext.jsx` – light/dark theme state and provider.
+- `src/layouts/DashboardLayout.jsx` – primary dashboard screen composition.
+
+There is also a `legacy_backup` folder containing an older static HTML/CSS version kept for reference.
 
 ## 🎨 Customization
 
