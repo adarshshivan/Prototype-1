@@ -32,7 +32,11 @@ const ThemeToggle = () => {
       <motion.div
         layout
         transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-        className="absolute top-1 left-1 w-7 h-7 rounded-full bg-[rgba(15,23,42,0.96)] shadow-[0_0_20px_rgba(148,163,184,0.55)] flex items-center justify-center"
+        className={`absolute top-1 left-1 w-7 h-7 rounded-full flex items-center justify-center ${
+          isDark
+            ? 'bg-[rgba(15,23,42,0.96)] shadow-[0_0_20px_rgba(148,163,184,0.55)]'
+            : 'bg-white shadow-[0_0_18px_rgba(148,163,184,0.35)]'
+        }`}
         animate={{ x: isDark ? 32 : 0 }}
       >
         <AnimatePresence mode="wait" initial={false}>

@@ -63,13 +63,13 @@ const Sidebar = () => {
                     <ThemeToggle />
                 </div>
 
-                <div className="rounded-2xl bg-white/5 border border-white/5 p-4">
+                <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--glass-border)] p-4 transition-colors duration-500">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/20">
                             A
                         </div>
                         <div className="flex-1 overflow-hidden">
-                            <h4 className="text-sm font-semibold truncate text-white">Adarsh</h4>
+                            <h4 className="text-sm font-semibold truncate text-[var(--text-main)]">Adarsh</h4>
                             <p className="text-xs text-[var(--text-muted)] truncate">Pro Member</p>
                         </div>
                     </div>

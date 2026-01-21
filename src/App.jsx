@@ -39,7 +39,7 @@ function App() {
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl font-bold text-white mb-2 tracking-tight"
+              className="text-4xl font-bold text-[var(--text-main)] mb-2 tracking-tight"
             >
               Dashboard
             </motion.h1>
@@ -72,7 +72,7 @@ function App() {
               viewport={{ once: true, amount: 0 }}
             >
               <div className="flex justify-between items-start mb-4">
-                <div className="p-3 rounded-xl bg-white/5 text-white" style={{ color: stat.color }}>
+                <div className="p-3 rounded-xl bg-white/5" style={{ color: stat.color }}>
                   <stat.icon size={24} />
                 </div>
                 {stat.trend !== '0%' && (
@@ -82,7 +82,7 @@ function App() {
                   </div>
                 )}
               </div>
-              <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+              <div className="text-3xl font-bold text-[var(--text-main)] mb-1">{stat.value}</div>
               <div className="text-xs font-semibold tracking-wider text-[var(--text-muted)]">{stat.title}</div>
             </GlassCard>
           ))}
@@ -95,7 +95,7 @@ function App() {
           <GlassCard className="lg:col-span-3 min-h-[400px] flex flex-col" delay={0.4}>
             <div className="flex justify-between items-center mb-8">
               <div>
-                <h3 className="text-xl font-bold text-white">Analytics Overview</h3>
+                <h3 className="text-xl font-bold text-[var(--text-main)]">Analytics Overview</h3>
                 <p className="text-sm text-[var(--text-muted)]">Project completion trends</p>
               </div>
               <div className="flex gap-2">

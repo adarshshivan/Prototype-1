@@ -13,7 +13,7 @@ const NeoButton = ({ children, variant = 'primary', className = '', ...props }) 
             border: '1px solid rgba(255,255,255,0.1)'
         },
         secondary: {
-            background: 'rgba(255, 255, 255, 0.05)',
+            background: 'rgba(148, 163, 184, 0.12)',
             color: 'var(--secondary)',
             boxShadow: 'none',
             border: '1px solid rgba(0, 245, 212, 0.3)'
