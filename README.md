@@ -73,11 +73,14 @@ Open your browser and navigate to `http://localhost:5173`.
 The core app lives in the `src` directory:
 
 - `src/main.jsx` – app entry point and React bootstrap.
-- `src/App.jsx` – top-level layout and routing surface.
-- `src/components/layout` – reusable layout pieces like `DashboardLayout` and `Sidebar`.
-- `src/components/ui` – shared UI elements such as `GlassCard`, `NeoButton`, and `ThemeToggle`.
-- `src/context/ThemeContext.jsx` – light/dark theme state and provider.
-- `src/layouts/DashboardLayout.jsx` – primary dashboard screen composition.
+- `src/App.jsx` – main dashboard screen and content.
+- `src/components/layout/DashboardLayout.jsx` – shell layout, sidebar, and glass background.
+- `src/components/layout/Sidebar.jsx` – navigation and primary layout controls.
+- `src/components/ui/GlassCard.jsx` – reusable glassmorphism card for stats and panels.
+- `src/components/ui/NeoButton.jsx` – primary/secondary CTA buttons with neumorphic styling.
+- `src/components/ui/ThemeToggle.jsx` – UI control to switch between light/dark themes.
+- `src/context/ThemeContext.jsx` – light/dark theme state, provider, and helpers.
+- `src/index.css` & `src/App.css` – base styles, tokens, and custom utilities.
 
 There is also a `legacy_backup` folder containing an older static HTML/CSS version kept for reference.
 
@@ -86,3 +89,20 @@ There is also a `legacy_backup` folder containing an older static HTML/CSS versi
 To customize the color palette or fonts, modify the `tailwind.config.js` file. The glassmorphism effects are primarily defined in `index.css` using utility classes and custom CSS variables.
 
 ---
+
+## 🌱 Future Enhancements
+
+Below are some ideas for how this dashboard can evolve next:
+
+- **Real data integration** – Connect the analytics and stats cards to a real API or database (projects, documents, teams) instead of the current dummy values.
+- **Authentication & roles** – Add login, user profiles, and role-based access (admin, member, guest) with different visible sections.
+- **Configurable widgets** – Allow users to rearrange, resize, add/remove dashboard widgets via drag-and-drop and persist their layout in local storage or a backend.
+- **Advanced analytics** – Replace the dummy bar chart with richer visualizations (line charts, pie charts, heatmaps) using a charting library like Recharts or Chart.js.
+- **Filtering & search** – Add global search, filters, and date range pickers to quickly slice the data shown across cards and charts.
+- **Notifications & activity feed** – Surface recent actions, alerts, and reminders in a dedicated panel or toast system.
+- **Multi-theme support** – Extend the current light/dark theming to multiple color schemes (e.g., blue, purple, neutral) with per-user preferences.
+- **Responsive improvements** – Further optimize layouts for tablets and small phones (e.g., collapsible sidebar, bottom nav for mobile).
+- **Accessibility** – Improve keyboard navigation, focus states, ARIA roles, and color contrast to meet WCAG guidelines.
+- **Testing & quality** – Add unit tests for core components, integration tests for flows, and set up a CI pipeline for linting and builds.
+
+These are suggestions only—feel free to adapt them based on your portfolio goals or the story you want this dashboard to tell.
