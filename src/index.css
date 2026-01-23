@@ -1,73 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-:root {
-  /* Neon Glass Palette - Dark is default */
-  color-scheme: dark;
-  --bg-dark: #030014;
-  --bg-card: rgba(17, 25, 40, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.05);
-
-  /* Semantic background so we can swap per theme */
-  --bg-body: #030014;
-
-  /* Accent Colors */
-  --primary: #9d4edd;
-  /* Deep Violet */
-  --primary-glow: rgba(157, 78, 221, 0.5);
-  --secondary: #00f5d4;
-  /* Neon Cyan */
-  --secondary-glow: rgba(0, 245, 212, 0.5);
-  --accent-pink: #f15bb5;
-  --accent-yellow: #fee440;
-
-  /* Text Colors */
-  --text-main: #ffffff;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-
-  /* Gradients */
-  --mesh-gradient: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
-
-  /* Animation */
-  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-
-  --theme-transition:
-    background-color 0.5s var(--ease-smooth),
-    color 0.5s var(--ease-smooth),
-    border-color 0.5s var(--ease-smooth),
-    background-image 0.7s var(--ease-smooth);
-}
-
-/* Light theme overrides */
-:root[data-theme='light'] {
-  color-scheme: light;
-
-  --bg-body: #f4f5fb;
-  --bg-dark: #f4f5fb;
-  --bg-card: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(15, 23, 42, 0.06);
-  --glass-highlight: rgba(255, 255, 255, 0.7);
-
-  --primary: #7c3aed;
-  --primary-glow: rgba(124, 58, 237, 0.45);
-  --secondary: #06b6d4;
-  --secondary-glow: rgba(6, 182, 212, 0.4);
-  --accent-pink: #db2777;
-  --accent-yellow: #facc15;
-
-  --text-main: #020617;
-  --text-muted: #64748b;
-  --text-dim: #9ca3af;
-}
 
 * {
   margin: 0;
@@ -76,27 +11,24 @@
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
-  background-color: var(--bg-body);
-  background-image:
-    radial-gradient(circle at 15% 50%, rgba(157, 78, 221, 0.08) 0%, transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(0, 245, 212, 0.08) 0%, transparent 25%);
-  color: var(--text-main);
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: white;
+  color: #000;
   -webkit-font-smoothing: antialiased;
-  transition: var(--theme-transition);
+  -moz-osx-font-smoothing: grayscale;
 }
 
-:root[data-theme='light'] body {
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 30%),
-    radial-gradient(circle at 90% 60%, rgba(6, 182, 212, 0.16) 0%, transparent 35%);
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0a0a0a;
+    color: #fff;
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -104,36 +36,22 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: #404040;
+  }
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #9ca3af;
 }
 
-/* Utilities */
-.glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.18);
-  transition: var(--theme-transition), box-shadow 0.5s var(--ease-smooth), transform 0.2s var(--ease-smooth);
-}
-
-/* Light theme refinement for glass surfaces */
-:root[data-theme='light'] .glass-panel {
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
-  border-color: rgba(148, 163, 184, 0.22);
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, var(--text-main) 0%, var(--text-muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.neon-glow {
-  box-shadow: 0 0 20px var(--primary-glow);
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb:hover {
+    background: #525252;
+  }
 }
