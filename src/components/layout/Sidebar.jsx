@@ -19,58 +19,43 @@ const Sidebar = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-            className="fixed left-0 top-0 h-full w-64 glass-panel border-r border-white/10 z-50 hidden md:flex flex-col"
+            className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-neutral-950 border-r border-neutral-200 dark:border-neutral-800 z-50 hidden md:flex flex-col"
         >
-            <div className="p-8">
-                <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/50 tracking-tight">
-                    NEXUS
+            <div className="p-6">
+                <h1 className="text-xl font-bold text-black dark:text-white tracking-tight">
+                    Nexus
                 </h1>
             </div>
 
-            <nav className="flex-1 px-4 space-y-2">
+            <nav className="flex-1 px-4 space-y-1">
                 {menuItems.map((item) => (
-                    <div key={item.label} className="relative">
-                        {active === item.label && (
-                            <motion.div
-                                layoutId="active-pill"
-                                className="absolute inset-0 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] opacity-20 rounded-xl"
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            />
-                        )}
-
+                    <div key={item.label}>
                         <button
                             onClick={() => setActive(item.label)}
-                            className={`relative w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-colors duration-200 group ${active === item.label ? 'text-white' : 'text-[var(--text-muted)] hover:text-white'
+                            className={`relative w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors duration-200 ${active === item.label ? 'bg-black dark:bg-white text-white dark:text-black' : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                                 }`}
                         >
-                            <item.icon size={20} className={`transition-transform duration-300 ${active === item.label ? 'scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'group-hover:scale-110'}`} />
-                            <span className="font-medium tracking-wide">{item.label}</span>
-
-                            {active === item.label && (
-                                <motion.div
-                                    layoutId="active-glow"
-                                    className="absolute left-0 w-1 h-6 bg-[var(--secondary)] rounded-r-full blur-[2px]"
-                                />
-                            )}
+                            <item.icon size={18} />
+                            <span className="font-medium text-sm">{item.label}</span>
                         </button>
                     </div>
                 ))}
             </nav>
 
             <div className="mt-auto px-4 pb-6 space-y-4">
-                <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                <div className="flex items-center justify-between text-xs font-medium text-neutral-600 dark:text-neutral-400">
                     <span>Theme</span>
                     <ThemeToggle />
                 </div>
 
-                <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--glass-border)] p-4 transition-colors duration-500">
+                <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 transition-colors duration-500">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/20">
+                        <div className="w-10 h-10 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-semibold text-sm">
                             A
                         </div>
                         <div className="flex-1 overflow-hidden">
-                            <h4 className="text-sm font-semibold truncate text-[var(--text-main)]">Adarsh</h4>
-                            <p className="text-xs text-[var(--text-muted)] truncate">Pro Member</p>
+                            <h4 className="text-sm font-semibold truncate text-black dark:text-white">Adarsh</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 truncate">Pro Member</p>
                         </div>
                     </div>
                 </div>
