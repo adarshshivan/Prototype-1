@@ -30,14 +30,15 @@ const Sidebar = () => {
             <nav className="flex-1 px-4 space-y-1">
                 {menuItems.map((item) => (
                     <div key={item.label}>
-                        <button
+                        <motion.button
+                            whileHover={{ x: 4 }}
                             onClick={() => setActive(item.label)}
-                            className={`relative w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors duration-200 ${active === item.label ? 'bg-black dark:bg-white text-white dark:text-black' : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                            className={`relative w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${active === item.label ? 'bg-black dark:bg-white text-white dark:text-black shadow-md' : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'
                                 }`}
                         >
-                            <item.icon size={18} />
-                            <span className="font-medium text-sm">{item.label}</span>
-                        </button>
+                            <item.icon size={20} />
+                            <span>{item.label}</span>
+                        </motion.button>
                     </div>
                 ))}
             </nav>

@@ -6,11 +6,12 @@ const GlassCard = ({ children, className = '', hoverEffect = true, delay = 0, ..
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
             whileHover={hoverEffect ? {
-                y: -2
+                y: -4,
+                boxShadow: '0 20px 40px -10px rgba(0,0,0,0.1)'
             } : {}}
-            className={`bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 transition-colors duration-200 ${className}`}
+            className={`bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-100 dark:border-neutral-800/50 shadow-sm hover:shadow-md transition-all duration-300 ${className}`}
             {...props}
         >
             <div>
