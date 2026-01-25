@@ -92,12 +92,43 @@ To customize the color palette or fonts, modify the `tailwind.config.js` file. T
 
 ## 🌱 Future Enhancements
 
-Below are some ideas for how this dashboard can evolve next:
+Below are ideas for how this dashboard can evolve to better serve users:
 
+### Core Features
 - **Real data integration** – Connect the analytics and stats cards to a real API or database (projects, documents, teams) instead of the current dummy values.
-- **Authentication & roles** – Add login, user profiles, and role-based access (admin, member, guest) with different visible sections.
+- **Authentication & roles** – Add login, user profiles, and role-based access (admin, member, guest) with different visible sections and permissions.
 - **Configurable widgets** – Allow users to rearrange, resize, add/remove dashboard widgets via drag-and-drop and persist their layout in local storage or a backend.
 - **Advanced analytics** – Replace the dummy bar chart with richer visualizations (line charts, pie charts, heatmaps) using a charting library like Recharts or Chart.js.
+
+### User Experience Improvements
+- **Search & filtering** – Add global search functionality and advanced filters to quickly find projects, tasks, or analytics data.
+- **Real-time notifications** – Implement push notifications for important events, updates, or alerts with a notification center/bell icon.
+- **Custom dashboards** – Allow each user to create and manage multiple personalized dashboard views based on their role and preferences.
+- **Dark/Light theme refinements** – Enhance the existing theme toggle with additional color schemes and auto-detection based on system preferences.
+- **Keyboard shortcuts** – Add keyboard navigation and shortcuts for power users to increase productivity.
+
+### Data & Reporting
+- **Export functionality** – Enable users to export dashboard data, reports, and charts in formats like PDF, CSV, and Excel.
+- **Scheduled reports** – Allow users to schedule automated report generation and email delivery.
+- **Data insights & recommendations** – Provide AI-powered suggestions based on analytics trends and patterns.
+- **Historical tracking** – Store and display data trends over time with comparison views (week-over-week, month-over-month).
+
+### Collaboration & Sharing
+- **Team collaboration** – Add features for team members to comment, share insights, and collaborate on dashboard items.
+- **Shareable dashboard links** – Generate public or private links to share specific dashboard views with stakeholders.
+- **Activity feed** – Display recent updates, changes, and team activities on the dashboard.
+
+### Performance & Infrastructure
+- **Caching & optimization** – Implement intelligent caching strategies and code splitting for faster load times.
+- **PWA capabilities** – Convert the app to a Progressive Web App for offline access and installability.
+- **Mobile app** – Develop native or cross-platform mobile apps (React Native/Flutter) for on-the-go access.
+- **Performance monitoring** – Add analytics to track app performance, load times, and user engagement metrics.
+
+### Developer Experience
+- **API documentation** – Create comprehensive API docs for developers to extend the dashboard with custom integrations.
+- **Plugin system** – Build a plugin architecture to allow third-party extensions and custom components.
+- **Testing suite** – Expand with unit tests, integration tests, and E2E tests for reliability and maintainability.
+- **Storybook integration** – Add Storybook for component documentation and isolated component development.
 - **Filtering & search** – Add global search, filters, and date range pickers to quickly slice the data shown across cards and charts.
 - **Notifications & activity feed** – Surface recent actions, alerts, and reminders in a dedicated panel or toast system.
 - **Multi-theme support** – Extend the current light/dark theming to multiple color schemes (e.g., blue, purple, neutral) with per-user preferences.
