@@ -145,33 +145,6 @@ function App() {
           </GlassCard>
         </div>
 
-        {/* Recent Activity */}
-        <GlassCard delay={0.4}>
-          <h3 className="text-lg font-bold text-black dark:text-white mb-6">Recent Activity</h3>
-          <div className="space-y-4">
-            {[
-              { action: 'Project Alpha launched', time: '2 hours ago', icon: '🚀' },
-              { action: 'Team meeting scheduled', time: '4 hours ago', icon: '📅' },
-              { action: 'New document created', time: '1 day ago', icon: '📄' },
-              { action: 'Milestone completed', time: '2 days ago', icon: '✓' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05 * i }}
-                className="flex items-center gap-4 p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700/80 transition-colors"
-              >
-                <div className="text-2xl">{item.icon}</div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium text-black dark:text-white truncate">{item.action}</p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">{item.time}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </GlassCard>
-
       </div>
     </DashboardLayout>
   )
