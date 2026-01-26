@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { LayoutDashboard, Bitcoin, Users, Settings, PieChart, Menu } from 'lucide-react'
 import { useState } from 'react'
-import ThemeToggle from '../ui/ThemeToggle'
 
 const Sidebar = () => {
     const [active, setActive] = useState('Dashboard')
@@ -44,11 +43,6 @@ const Sidebar = () => {
             </nav>
 
             <div className="mt-auto px-4 pb-6 space-y-4">
-                <div className="flex items-center justify-between text-xs font-medium text-neutral-600 dark:text-neutral-400">
-                    <span>Theme</span>
-                    <ThemeToggle />
-                </div>
-
                 <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 transition-colors duration-500">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-semibold text-sm">
