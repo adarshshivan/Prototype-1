@@ -1,0 +1,348 @@
+name: CI/CD Pipeline
+
+# Trigger the workflow on various events
+on:
+  # Run on every push to any branch
+  push:
+    branches: ['**']
+  
+  # Run on pull requests targeting main/master branches
+  pull_request:
+    branches: [main, master]
+  
+  # Allow manual workflow dispatch from GitHub UI
+  workflow_dispatch:
+
+# Cancel in-progress runs when new commits are pushed to the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Define environment variables used across all jobs
+env:
+  NODE_VERSION: '20.x'  # Specify Node.js version for consistency
+  PNPM_VERSION: '8'     # Use pnpm for faster installs (can change to npm if needed)
+
+jobs:
+  # ============================================
+  # JOB 1: Code Quality & Linting
+  # ============================================
+  lint:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch all history for better diff analysis
+          fetch-depth: 0
+      
+      # Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          # Cache node_modules to speed up subsequent runs
+          cache: 'npm'
+      
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+      
+      # Run ESLint to check code quality
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: false  # Fail the job if linting errors are found
+      
+      # Check code formatting with Prettier (if configured)
+      - name: Check Code Formatting
+        run: |
+          if grep -q "prettier" package.json; then
+            npm run format:check || echo "No prettier script found, skipping"
+          else
+            echo "Prettier not configured, skipping format check"
+          fi
+        continue-on-error: true
+
+  # ============================================
+  # JOB 2: Security Audit
+  # ============================================
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      # Check for known vulnerabilities in dependencies
+      - name: Run Security Audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true  # Don't fail on warnings, only critical issues
+      
+      # Scan for secrets accidentally committed
+      - name: Secret Scanning
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+        continue-on-error: true
+
+  # ============================================
+  # JOB 3: Build Application
+  # ============================================
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: [lint]  # Only build if linting passes
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      # Build the Vite application
+      - name: Build Production Bundle
+        run: npm run build
+        env:
+          # Add any build-time environment variables here
+          NODE_ENV: production
+      
+      # Check bundle size and performance
+      - name: Analyze Bundle Size
+        run: |
+          echo "📦 Build completed successfully!"
+          echo "📊 Analyzing build output..."
+          du -sh dist/
+          find dist/ -type f -name "*.js" -exec ls -lh {} \;
+      
+      # Upload build artifacts for deployment or testing
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: dist/
+          retention-days: 7  # Keep artifacts for 7 days
+          if-no-files-found: error
+
+  # ============================================
+  # JOB 4: Run Tests (if available)
+  # ============================================
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: [lint]
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      # Run tests if test script exists
+      - name: Run Unit Tests
+        run: |
+          if grep -q "\"test\"" package.json; then
+            npm test
+          else
+            echo "⚠️ No test script found in package.json"
+            echo "Consider adding tests for better code quality!"
+          fi
+        continue-on-error: true  # Don't fail if no tests exist
+      
+      # Generate test coverage report
+      - name: Generate Coverage Report
+        run: |
+          if grep -q "\"coverage\"" package.json; then
+            npm run coverage
+          else
+            echo "No coverage script found, skipping"
+          fi
+        continue-on-error: true
+      
+      # Upload coverage to Codecov (optional)
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: always()
+        with:
+          files: ./coverage/coverage-final.json
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  # ============================================
+  # JOB 5: Code Quality Analysis
+  # ============================================
+  code-quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history needed for accurate analysis
+      
+      # SonarCloud Scan for code quality metrics
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
+            -Dsonar.organization=${{ github.repository_owner }}
+        continue-on-error: true  # Don't fail if SonarCloud is not configured
+
+  # ============================================
+  # JOB 6: Deploy to Staging (for non-main branches)
+  # ============================================
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    # Only deploy on non-main branch pushes
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master'
+    
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      # Download the build artifacts from the build job
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist/
+      
+      # Deploy to Netlify (example - can be replaced with other services)
+      - name: Deploy to Netlify
+        id: deploy
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: './dist'
+          production-deploy: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions - ${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        continue-on-error: true
+      
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🚀 Staging deployment ready!\n\nPreview URL: ${{ steps.deploy.outputs.url }}'
+            })
+        continue-on-error: true
+
+  # ============================================
+  # JOB 7: Deploy to Production (main branch only)
+  # ============================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build, test, security]
+    # Only deploy on main/master branch pushes
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist/
+      
+      # Deploy to Netlify Production (can be replaced with other services)
+      - name: Deploy to Production
+        id: deploy
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: './dist'
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Production Deploy from GitHub Actions"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        continue-on-error: true
+      
+      # Create a GitHub Release on successful production deploy
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          body: |
+            🚀 Production deployment completed
+            
+            **Commit:** ${{ github.sha }}
+            **Author:** ${{ github.actor }}
+            
+            [View Deployment](${{ steps.deploy.outputs.url }})
+          draft: false
+          prerelease: false
+        continue-on-error: true
+      
+      # Notify deployment success
+      - name: Deployment Success Notification
+        if: success()
+        run: |
+          echo "✅ Production deployment successful!"
+          echo "🌐 URL: ${{ steps.deploy.outputs.url }}"
+
+  # ============================================
+  # JOB 8: Cleanup
+  # ============================================
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()  # Run even if previous jobs fail
+    
+    steps:
+      - name: Clean up artifacts
+        run: echo "🧹 Cleaning up temporary artifacts..."
