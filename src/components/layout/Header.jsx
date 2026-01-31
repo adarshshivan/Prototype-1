@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 const Header = ({ onToggleSidebar, isSidebarOpen }) => {
     const [showSearch, setShowSearch] = useState(false)
-    const [notifications, setNotifications] = useState(3)
+    const [notifications] = useState(3)
     const [showNotifications, setShowNotifications] = useState(false)
 
     const notificationList = [

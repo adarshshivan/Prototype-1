@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!raw) return fallback;
       const parsed = JSON.parse(raw);
       return Array.isArray(fallback) && !Array.isArray(parsed) ? fallback : parsed;
-    } catch (e) {
+    } catch {
       return fallback;
     }
   }
