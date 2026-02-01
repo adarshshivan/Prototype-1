@@ -317,8 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const monthIncomeEl = document.getElementById('monthIncome');
     const monthSavingsEl = document.getElementById('monthSavings');
-    const parsedIncome = monthIncomeEl ? monthIncomeEl.textContent : '';
-    const parsedSavings = monthSavingsEl ? monthSavingsEl.textContent : '';
 
     const nwGoal = Number(state.goals.netWorth) || null;
     const msGoal = Number(state.goals.monthlySavings) || null;
@@ -537,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currencySelect) currencySelect.value = state.currency;
             refreshAll();
             if (backupStatus) backupStatus.textContent = 'Data imported successfully.';
-          } catch (err) {
+          } catch (_err) {
             if (backupStatus) backupStatus.textContent = 'Import failed: invalid file.';
           }
         };
