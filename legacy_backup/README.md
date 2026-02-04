@@ -2,6 +2,10 @@
 
 A single-page, responsive web app for tracking your personal finances locally in the browser. Data is stored in `localStorage` only on your machine.
 
+## 🆕 Recent Activity (February 4, 2026)
+
+- Updated documentation to reflect current project context.
+
 ## Features
 
 - **Overview**: See total net worth, this months income, and this months expenses at a glance.
