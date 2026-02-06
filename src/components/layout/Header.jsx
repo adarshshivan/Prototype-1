@@ -25,6 +25,7 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
                 <div className="flex items-center gap-4">
                     <button
                         onClick={onToggleSidebar}
+                        aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
                         className="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     >
                         {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
@@ -32,6 +33,7 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
                     
                     <button
                         onClick={() => setShowSearch(!showSearch)}
+                        aria-label="Toggle search"
                         className="hidden md:flex p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     >
                         <Search size={20} className="text-neutral-600 dark:text-neutral-400" />
@@ -59,7 +61,10 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
                 {/* Right Section */}
                 <div className="flex items-center gap-3">
                     {/* Mobile Search */}
-                    <button className="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                    <button
+                        aria-label="Open search"
+                        className="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    >
                         <Search size={20} className="text-neutral-600 dark:text-neutral-400" />
                     </button>
 
@@ -69,6 +74,7 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setShowNotifications(!showNotifications)}
+                            aria-label="Toggle notifications"
                             className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                         >
                             <Bell size={20} className="text-neutral-600 dark:text-neutral-400" />
