@@ -133,7 +133,7 @@ const ProjectsSection = () => {
                 <div>
                     <h2 className="text-xl font-bold text-black dark:text-white">Active Projects</h2>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                        Track your ongoing projects
+                        Track active delivery progress
                     </p>
                 </div>
                 <button className="text-sm font-medium text-black dark:text-white hover:underline">
