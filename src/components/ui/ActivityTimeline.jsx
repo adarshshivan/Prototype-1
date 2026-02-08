@@ -7,8 +7,8 @@ const ActivityTimeline = () => {
             id: 1,
             type: 'project',
             title: 'New project created',
-            description: 'Marketing campaign dashboard',
-            time: '2 minutes ago',
+            description: 'Marketing campaign dashboard brief',
+            time: '5 minutes ago',
             color: 'bg-blue-500'
         },
         {
