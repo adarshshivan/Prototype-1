@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 const NeoButton = ({ children, variant = 'primary', className = '', ...props }) => {
-    const baseStyles = "relative px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2"
+    const baseStyles = "relative px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2 select-none"
 
     const variants = {
         primary: "bg-black dark:bg-white text-white dark:text-black shadow-lg shadow-black/20 dark:shadow-white/10 hover:shadow-xl hover:shadow-black/30 dark:hover:shadow-white/20",
