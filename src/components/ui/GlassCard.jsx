@@ -11,6 +11,7 @@ const GlassCard = ({ children, className = '', hoverEffect = true, delay = 0, ..
                 y: -4,
                 boxShadow: '0 20px 40px -10px rgba(0,0,0,0.1)'
             } : {}}
+            data-component="glass-card"
             className={`bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-100 dark:border-neutral-800/50 shadow-sm hover:shadow-md transition-all duration-300 ${className}`}
             {...props}
         >
