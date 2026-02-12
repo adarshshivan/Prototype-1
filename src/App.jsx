@@ -20,7 +20,7 @@ function App() {
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-4xl font-bold text-black dark:text-white mb-2">Dashboard</h1>
-            <p className="text-neutral-600 dark:text-neutral-400 text-base">Welcome back! Track your progress at a glance.</p>
+            <p className="text-neutral-600 dark:text-neutral-400 text-base">Welcome back! Here's a quick snapshot of your progress.</p>
           </div>
           <div className="flex gap-3">
             <NeoButton variant="secondary">Reports</NeoButton>
