@@ -2,6 +2,13 @@
 
 All notable changes to the Modern Dashboard Portfolio project will be documented in this file.
 
+## [Maintenance] - February 14, 2026
+
+### Changed
+- Minor copy tweaks across dashboard UI.
+- Added accessibility labels for header actions.
+- Small styling refinements for buttons and scrollbar.
+
 ## [Project Initialized] - January 29, 2026
 
 ### Added
@@ -96,4 +103,4 @@ npm run preview  # Preview production build
 
 ---
 
-**Last Updated**: January 29, 2026
+**Last Updated**: February 14, 2026
