@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Bell, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import ThemeToggle from '../ui/ThemeToggle'
 
 const Header = ({ onToggleSidebar, isSidebarOpen }) => {
     const [showSearch, setShowSearch] = useState(false)
@@ -60,6 +61,10 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
 
                 {/* Right Section */}
                 <div className="flex items-center gap-3">
+                    <div className="hidden sm:block">
+                        <ThemeToggle />
+                    </div>
+
                     {/* Mobile Search */}
                     <button
                         aria-label="Open search"
