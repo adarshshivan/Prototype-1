@@ -35,7 +35,7 @@ const DashboardLayout = ({ children }) => {
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             className="md:hidden"
                         >
-                            <Sidebar onClose={toggleSidebar} />
+                            <Sidebar isMobile onClose={toggleSidebar} />
                         </motion.div>
                     </>
                 )}
