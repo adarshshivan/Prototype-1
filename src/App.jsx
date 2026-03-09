@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion' // Used in JSX: motion.div, motion.button
+import { useMemo, useState } from 'react'
 import DashboardLayout from './components/layout/DashboardLayout'
 import GlassCard from './components/ui/GlassCard'
 import NeoButton from './components/ui/NeoButton'
 import { FileText, Briefcase, Users, Folder, Plus, TrendingUp, ArrowRight, Calendar, Activity } from 'lucide-react'
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('')
+
   const stats = [
     { title: 'Documents', value: '12', icon: FileText, trend: '+2.5%' },
     { title: 'Projects', value: '5', icon: Briefcase, trend: '+12%' },
@@ -12,8 +15,32 @@ function App() {
     { title: 'Folders', value: '8', icon: Folder, trend: '+5%' },
   ]
 
+  const quickActions = [
+    { label: 'Schedule', icon: Calendar },
+    { label: 'Activity', icon: Activity },
+    { label: 'Reports', icon: FileText },
+  ]
+
+  const normalizedQuery = searchQuery.trim().toLowerCase()
+
+  const filteredStats = useMemo(() => {
+    if (!normalizedQuery) {
+      return stats
+    }
+
+    return stats.filter((stat) => stat.title.toLowerCase().includes(normalizedQuery))
+  }, [normalizedQuery])
+
+  const filteredQuickActions = useMemo(() => {
+    if (!normalizedQuery) {
+      return quickActions
+    }
+
+    return quickActions.filter((action) => action.label.toLowerCase().includes(normalizedQuery))
+  }, [normalizedQuery])
+
   return (
-    <DashboardLayout>
+    <DashboardLayout searchValue={searchQuery} onSearchChange={setSearchQuery}>
       <div className="max-w-7xl mx-auto space-y-8 py-8 px-4">
 
         {/* Page Header */}
@@ -33,7 +60,7 @@ function App() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {stats.map((stat, index) => (
+          {filteredStats.map((stat, index) => (
             <GlassCard key={stat.title} delay={index * 0.08}>
               <div className="flex justify-between items-start mb-4">
                 <div>
@@ -101,39 +128,26 @@ function App() {
           <GlassCard delay={0.3}>
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-black dark:text-white mb-6">Quick Actions</h3>
-              
-              <motion.button
-                whileHover={{ x: 4 }}
-                className="w-full flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group"
-              >
-                <div className="flex items-center gap-3">
-                  <Calendar size={18} className="text-neutral-700 dark:text-neutral-300" />
-                  <span className="font-medium text-sm text-black dark:text-white">Schedule</span>
-                </div>
-                <ArrowRight size={16} className="text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300" />
-              </motion.button>
 
-              <motion.button
-                whileHover={{ x: 4 }}
-                className="w-full flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group"
-              >
-                <div className="flex items-center gap-3">
-                  <Activity size={18} className="text-neutral-700 dark:text-neutral-300" />
-                  <span className="font-medium text-sm text-black dark:text-white">Activity</span>
-                </div>
-                <ArrowRight size={16} className="text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300" />
-              </motion.button>
+              {filteredQuickActions.map((action) => (
+                <motion.button
+                  key={action.label}
+                  whileHover={{ x: 4 }}
+                  className="w-full flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group"
+                >
+                  <div className="flex items-center gap-3">
+                    <action.icon size={18} className="text-neutral-700 dark:text-neutral-300" />
+                    <span className="font-medium text-sm text-black dark:text-white">{action.label}</span>
+                  </div>
+                  <ArrowRight size={16} className="text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300" />
+                </motion.button>
+              ))}
 
-              <motion.button
-                whileHover={{ x: 4 }}
-                className="w-full flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group"
-              >
-                <div className="flex items-center gap-3">
-                  <FileText size={18} className="text-neutral-700 dark:text-neutral-300" />
-                  <span className="font-medium text-sm text-black dark:text-white">Reports</span>
+              {normalizedQuery && filteredQuickActions.length === 0 && (
+                <div className="rounded-lg border border-dashed border-neutral-200 dark:border-neutral-700 px-4 py-6 text-center text-sm text-neutral-500 dark:text-neutral-400">
+                  No quick actions match “{searchQuery}”.
                 </div>
-                <ArrowRight size={16} className="text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300" />
-              </motion.button>
+              )}
 
               <hr className="border-neutral-200 dark:border-neutral-700 my-2" />
 

@@ -2,17 +2,25 @@ import { useState } from 'react'
 import { Search, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-const SearchBar = ({ onSearch, placeholder = 'Search...', onClear }) => {
-    const [value, setValue] = useState('')
+const SearchBar = ({ value: controlledValue, onSearch, placeholder = 'Search...', onClear, autoFocus = false }) => {
+    const [internalValue, setInternalValue] = useState('')
+    const value = controlledValue ?? internalValue
 
     const handleChange = (e) => {
         const newValue = e.target.value
-        setValue(newValue)
+        if (controlledValue === undefined) {
+            setInternalValue(newValue)
+        }
+
         onSearch(newValue)
     }
 
     const handleClear = () => {
-        setValue('')
+        if (controlledValue === undefined) {
+            setInternalValue('')
+        }
+
+        onSearch('')
         onClear?.()
     }
 
@@ -26,6 +34,7 @@ const SearchBar = ({ onSearch, placeholder = 'Search...', onClear }) => {
                 placeholder={placeholder}
                 className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-transparent focus:border-neutral-300 dark:focus:border-neutral-600 outline-none transition-colors"
                 aria-label="Search"
+                autoFocus={autoFocus}
             />
             {value && (
                 <motion.button

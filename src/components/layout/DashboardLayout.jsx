@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Sidebar from './Sidebar'
 import Header from './Header'
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = ({ children, searchValue, onSearchChange }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
     const toggleSidebar = () => {
@@ -42,7 +42,12 @@ const DashboardLayout = ({ children }) => {
             </AnimatePresence>
 
             <main className="flex-1 md:pl-64 flex flex-col bg-gradient-to-br from-white via-neutral-50 to-white dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
-                <Header onToggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+                <Header
+                    onToggleSidebar={toggleSidebar}
+                    isSidebarOpen={isSidebarOpen}
+                    searchValue={searchValue}
+                    onSearchChange={onSearchChange}
+                />
                 <div className="flex-1 overflow-y-auto">
                     {children}
                 </div>

@@ -2,8 +2,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Bell, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import ThemeToggle from '../ui/ThemeToggle'
+import SearchBar from '../ui/SearchBar'
 
-const Header = ({ onToggleSidebar, isSidebarOpen }) => {
+const Header = ({ onToggleSidebar, isSidebarOpen, searchValue = '', onSearchChange = () => {} }) => {
     const [showSearch, setShowSearch] = useState(false)
     const [notifications] = useState(3)
     const [showNotifications, setShowNotifications] = useState(false)
@@ -48,10 +49,10 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
                                 exit={{ width: 0, opacity: 0 }}
                                 className="hidden md:block"
                             >
-                                <input
-                                    type="text"
-                                    placeholder="Search..."
-                                    className="w-full px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+                                <SearchBar
+                                    value={searchValue}
+                                    onSearch={onSearchChange}
+                                    placeholder="Search stats and actions..."
                                     autoFocus
                                 />
                             </motion.div>
@@ -67,6 +68,8 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
 
                     {/* Mobile Search */}
                     <button
+                        type="button"
+                        onClick={() => setShowSearch((prev) => !prev)}
                         aria-label="Open search"
                         className="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     >
@@ -141,6 +144,24 @@ const Header = ({ onToggleSidebar, isSidebarOpen }) => {
                     </div>
                 </div>
             </div>
+
+            <AnimatePresence>
+                {showSearch && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="px-4 pb-4 md:hidden"
+                    >
+                        <SearchBar
+                            value={searchValue}
+                            onSearch={onSearchChange}
+                            placeholder="Search stats and actions..."
+                            autoFocus
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.header>
     )
 }
