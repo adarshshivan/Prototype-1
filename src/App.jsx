@@ -3,7 +3,9 @@ import { useMemo, useState } from 'react'
 import DashboardLayout from './components/layout/DashboardLayout'
 import GlassCard from './components/ui/GlassCard'
 import NeoButton from './components/ui/NeoButton'
+import PageHeader from './components/ui/PageHeader'
 import { FileText, Briefcase, Users, Folder, Plus, TrendingUp, ArrowRight, Calendar, Activity } from 'lucide-react'
+import { formatDate } from './utils/dateUtils'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -44,19 +46,23 @@ function App() {
       <div className="max-w-7xl mx-auto space-y-8 py-8 px-4">
 
         {/* Page Header */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-4xl font-bold text-black dark:text-white mb-2">Dashboard</h1>
-            <p className="text-neutral-600 dark:text-neutral-400 text-base">Welcome back! Here's a quick snapshot of your progress.</p>
-          </div>
-          <div className="flex gap-3">
+        <PageHeader
+          title="Dashboard"
+          subtitle={`Welcome back! Here's a quick snapshot of your progress for ${formatDate(new Date(), 'DDDD, MMM DD, YYYY')}.`}
+          breadcrumbs={[
+            { label: 'Workspace', href: '#' },
+            { label: 'Dashboard', href: '#' },
+          ]}
+          action={(
+            <div className="flex gap-3">
             <NeoButton variant="secondary">Reports</NeoButton>
             <NeoButton variant="primary">
               <Plus size={16} />
               New Project
             </NeoButton>
-          </div>
-        </motion.div>
+            </div>
+          )}
+        />
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
