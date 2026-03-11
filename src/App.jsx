@@ -4,6 +4,7 @@ import DashboardLayout from './components/layout/DashboardLayout'
 import GlassCard from './components/ui/GlassCard'
 import NeoButton from './components/ui/NeoButton'
 import PageHeader from './components/ui/PageHeader'
+import ProjectsSection from './components/ui/ProjectsSection'
 import { FileText, Briefcase, Users, Folder, Plus, TrendingUp, ArrowRight, Calendar, Activity } from 'lucide-react'
 import { formatDate } from './utils/dateUtils'
 
@@ -23,6 +24,51 @@ function App() {
     { label: 'Reports', icon: FileText },
   ]
 
+  const projects = [
+    {
+      id: 1,
+      name: 'Website Redesign',
+      description: 'Complete overhaul of company website with modern UI/UX',
+      status: 'active',
+      progress: 75,
+      deadline: '2 weeks',
+      team: 5,
+      trending: true,
+      trendingValue: 12,
+    },
+    {
+      id: 2,
+      name: 'Client Portal',
+      description: 'Launch a secure document and approvals hub for enterprise clients',
+      status: 'active',
+      progress: 62,
+      deadline: '10 days',
+      team: 6,
+      trending: true,
+      trendingValue: 9,
+    },
+    {
+      id: 3,
+      name: 'Marketing Campaign',
+      description: 'Coordinate Q2 launch assets, landing pages, and paid acquisition setup',
+      status: 'planning',
+      progress: 30,
+      deadline: '3 weeks',
+      team: 4,
+      trending: false,
+    },
+    {
+      id: 4,
+      name: 'Data Migration',
+      description: 'Move reporting workloads from the legacy warehouse to the new cloud stack',
+      status: 'pending',
+      progress: 45,
+      deadline: '1 week',
+      team: 3,
+      trending: false,
+    },
+  ]
+
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
   const filteredStats = useMemo(() => {
@@ -39,6 +85,17 @@ function App() {
     }
 
     return quickActions.filter((action) => action.label.toLowerCase().includes(normalizedQuery))
+  }, [normalizedQuery])
+
+  const filteredProjects = useMemo(() => {
+    if (!normalizedQuery) {
+      return projects
+    }
+
+    return projects.filter((project) => {
+      const content = `${project.name} ${project.description} ${project.status}`.toLowerCase()
+      return content.includes(normalizedQuery)
+    })
   }, [normalizedQuery])
 
   return (
@@ -164,6 +221,8 @@ function App() {
             </div>
           </GlassCard>
         </div>
+
+        <ProjectsSection projects={filteredProjects} />
 
       </div>
     </DashboardLayout>

@@ -81,8 +81,7 @@ const ProjectCard = ({ project, index }) => {
     )
 }
 
-const ProjectsSection = () => {
-    const projects = [
+const defaultProjects = [
         {
             id: 1,
             name: 'Website Redesign',
@@ -127,6 +126,8 @@ const ProjectsSection = () => {
         },
     ]
 
+const ProjectsSection = ({ projects = defaultProjects }) => {
+
     return (
         <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -146,6 +147,12 @@ const ProjectsSection = () => {
                     <ProjectCard key={project.id} project={project} index={index} />
                 ))}
             </div>
+
+            {projects.length === 0 && (
+                <div className="rounded-xl border border-dashed border-neutral-200 dark:border-neutral-700 px-6 py-10 text-center text-sm text-neutral-500 dark:text-neutral-400">
+                    No projects match the current filters.
+                </div>
+            )}
         </div>
     )
 }
