@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 import { GitCommit, Clock } from 'lucide-react'
 
-const ActivityTimeline = () => {
-    const activities = [
+const defaultActivities = [
         {
             id: 1,
             type: 'project',
@@ -44,6 +43,15 @@ const ActivityTimeline = () => {
             color: 'bg-pink-500'
         },
     ]
+
+const ActivityTimeline = ({ activities = defaultActivities }) => {
+    if (activities.length === 0) {
+        return (
+            <div className="rounded-xl border border-dashed border-neutral-200 dark:border-neutral-700 px-6 py-10 text-center text-sm text-neutral-500 dark:text-neutral-400">
+                No activity matches the current filters.
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-1">

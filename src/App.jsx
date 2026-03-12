@@ -4,6 +4,7 @@ import DashboardLayout from './components/layout/DashboardLayout'
 import GlassCard from './components/ui/GlassCard'
 import NeoButton from './components/ui/NeoButton'
 import PageHeader from './components/ui/PageHeader'
+import ActivityTimeline from './components/ui/ActivityTimeline'
 import ProjectsSection from './components/ui/ProjectsSection'
 import { FileText, Briefcase, Users, Folder, Plus, TrendingUp, ArrowRight, Calendar, Activity } from 'lucide-react'
 import { formatDate } from './utils/dateUtils'
@@ -69,6 +70,41 @@ function App() {
     },
   ]
 
+  const activities = [
+    {
+      id: 1,
+      type: 'project',
+      title: 'Client portal scope approved',
+      description: 'Product and delivery signed off the MVP requirements.',
+      time: '12 minutes ago',
+      color: 'bg-blue-500',
+    },
+    {
+      id: 2,
+      type: 'document',
+      title: 'Quarterly report uploaded',
+      description: 'Finance added the latest planning packet for leadership review.',
+      time: '1 hour ago',
+      color: 'bg-green-500',
+    },
+    {
+      id: 3,
+      type: 'team',
+      title: 'New designer onboarded',
+      description: 'Priya joined the product design pod for the redesign stream.',
+      time: '3 hours ago',
+      color: 'bg-purple-500',
+    },
+    {
+      id: 4,
+      type: 'update',
+      title: 'Migration dry run completed',
+      description: 'The staging import finished with no blocking validation issues.',
+      time: '5 hours ago',
+      color: 'bg-orange-500',
+    },
+  ]
+
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
   const filteredStats = useMemo(() => {
@@ -94,6 +130,17 @@ function App() {
 
     return projects.filter((project) => {
       const content = `${project.name} ${project.description} ${project.status}`.toLowerCase()
+      return content.includes(normalizedQuery)
+    })
+  }, [normalizedQuery])
+
+  const filteredActivities = useMemo(() => {
+    if (!normalizedQuery) {
+      return activities
+    }
+
+    return activities.filter((activity) => {
+      const content = `${activity.title} ${activity.description} ${activity.type}`.toLowerCase()
       return content.includes(normalizedQuery)
     })
   }, [normalizedQuery])
@@ -223,6 +270,16 @@ function App() {
         </div>
 
         <ProjectsSection projects={filteredProjects} />
+
+        <GlassCard delay={0.35} hoverEffect={false}>
+          <div className="mb-6 flex items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg font-bold text-black dark:text-white">Recent Activity</h3>
+              <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Follow delivery updates, uploads, and team events in one place.</p>
+            </div>
+          </div>
+          <ActivityTimeline activities={filteredActivities} />
+        </GlassCard>
 
       </div>
     </DashboardLayout>
