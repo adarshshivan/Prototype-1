@@ -1,9 +1,14 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useCallback } from 'react'
 
 const NotificationContext = createContext()
 
 export function NotificationProvider({ children }) {
     const [notifications, setNotifications] = useState([])
+
+    const removeNotification = useCallback((id) => {
+        setNotifications((prev) => prev.filter((notif) => notif.id !== id))
+    }, [])
 
     const addNotification = useCallback((message, type = 'info', duration = 3000) => {
         const id = Date.now()
@@ -13,19 +18,19 @@ export function NotificationProvider({ children }) {
 
         if (duration > 0) {
             setTimeout(() => {
-                removeNotification(id)
+                setNotifications((prev) => prev.filter((notif) => notif.id !== id))
             }, duration)
         }
 
         return id
     }, [])
 
-    const removeNotification = useCallback((id) => {
-        setNotifications((prev) => prev.filter((notif) => notif.id !== id))
+    const clearNotifications = useCallback(() => {
+        setNotifications([])
     }, [])
 
     return (
-        <NotificationContext.Provider value={{ notifications, addNotification, removeNotification }}>
+        <NotificationContext.Provider value={{ notifications, addNotification, removeNotification, clearNotifications }}>
             {children}
         </NotificationContext.Provider>
     )

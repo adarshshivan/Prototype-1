@@ -8,9 +8,11 @@ import ActivityTimeline from './components/ui/ActivityTimeline'
 import ProjectsSection from './components/ui/ProjectsSection'
 import { FileText, Briefcase, Users, Folder, Plus, TrendingUp, ArrowRight, Calendar, Activity } from 'lucide-react'
 import { formatDate } from './utils/dateUtils'
+import { useNotification } from './context/NotificationContext'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
+  const { addNotification } = useNotification()
 
   const stats = [
     { title: 'Documents', value: '12', icon: FileText, trend: '+2.5%' },
@@ -145,6 +147,10 @@ function App() {
     })
   }, [normalizedQuery])
 
+  const handleActionClick = (message, type = 'info') => {
+    addNotification(message, type)
+  }
+
   return (
     <DashboardLayout searchValue={searchQuery} onSearchChange={setSearchQuery}>
       <div className="max-w-7xl mx-auto space-y-8 py-8 px-4">
@@ -159,8 +165,8 @@ function App() {
           ]}
           action={(
             <div className="flex gap-3">
-            <NeoButton variant="secondary">Reports</NeoButton>
-            <NeoButton variant="primary">
+            <NeoButton variant="secondary" onClick={() => handleActionClick('Opened the reports workspace.', 'info')}>Reports</NeoButton>
+            <NeoButton variant="primary" onClick={() => handleActionClick('Started a new project draft.', 'success')}>
               <Plus size={16} />
               New Project
             </NeoButton>
@@ -243,6 +249,7 @@ function App() {
                 <motion.button
                   key={action.label}
                   whileHover={{ x: 4 }}
+                  onClick={() => handleActionClick(`${action.label} is ready for the next workflow step.`, 'info')}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
@@ -261,7 +268,7 @@ function App() {
 
               <hr className="border-neutral-200 dark:border-neutral-700 my-2" />
 
-              <NeoButton variant="outline" className="w-full">
+              <NeoButton variant="outline" className="w-full" onClick={() => handleActionClick('Opened the full action catalog.', 'info')}>
                 <Plus size={16} />
                 View All
               </NeoButton>
