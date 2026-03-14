@@ -58,7 +58,9 @@ export function useAsync(asyncFunction, immediate = true) {
 
     useEffect(() => {
         if (immediate) {
-            execute()
+            Promise.resolve().then(() => {
+                execute()
+            })
         }
     }, [execute, immediate])
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion' // Used in JSX: motion.div, motion.button
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import DashboardLayout from './components/layout/DashboardLayout'
 import GlassCard from './components/ui/GlassCard'
 import NeoButton from './components/ui/NeoButton'
@@ -9,6 +9,7 @@ import ProjectsSection from './components/ui/ProjectsSection'
 import { FileText, Briefcase, Users, Folder, Plus, TrendingUp, ArrowRight, Calendar, Activity } from 'lucide-react'
 import { formatDate } from './utils/dateUtils'
 import { useNotification } from './context/NotificationContext'
+import { analytics } from './utils/analytics'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -109,45 +110,37 @@ function App() {
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
-  const filteredStats = useMemo(() => {
-    if (!normalizedQuery) {
-      return stats
-    }
+  const filteredStats = !normalizedQuery
+    ? stats
+    : stats.filter((stat) => stat.title.toLowerCase().includes(normalizedQuery))
 
-    return stats.filter((stat) => stat.title.toLowerCase().includes(normalizedQuery))
-  }, [normalizedQuery])
+  const filteredQuickActions = !normalizedQuery
+    ? quickActions
+    : quickActions.filter((action) => action.label.toLowerCase().includes(normalizedQuery))
 
-  const filteredQuickActions = useMemo(() => {
-    if (!normalizedQuery) {
-      return quickActions
-    }
-
-    return quickActions.filter((action) => action.label.toLowerCase().includes(normalizedQuery))
-  }, [normalizedQuery])
-
-  const filteredProjects = useMemo(() => {
-    if (!normalizedQuery) {
-      return projects
-    }
-
-    return projects.filter((project) => {
+  const filteredProjects = !normalizedQuery
+    ? projects
+    : projects.filter((project) => {
       const content = `${project.name} ${project.description} ${project.status}`.toLowerCase()
       return content.includes(normalizedQuery)
     })
-  }, [normalizedQuery])
 
-  const filteredActivities = useMemo(() => {
-    if (!normalizedQuery) {
-      return activities
-    }
-
-    return activities.filter((activity) => {
+  const filteredActivities = !normalizedQuery
+    ? activities
+    : activities.filter((activity) => {
       const content = `${activity.title} ${activity.description} ${activity.type}`.toLowerCase()
       return content.includes(normalizedQuery)
     })
-  }, [normalizedQuery])
 
-  const handleActionClick = (message, type = 'info') => {
+  useEffect(() => {
+    analytics.trackPageView('dashboard')
+  }, [])
+
+  const handleActionClick = (message, type = 'info', analyticsAction = 'dashboard_action_clicked') => {
+    analytics.trackUserAction(analyticsAction, {
+      type,
+      searchQuery: normalizedQuery || 'none',
+    })
     addNotification(message, type)
   }
 
@@ -165,8 +158,8 @@ function App() {
           ]}
           action={(
             <div className="flex gap-3">
-            <NeoButton variant="secondary" onClick={() => handleActionClick('Opened the reports workspace.', 'info')}>Reports</NeoButton>
-            <NeoButton variant="primary" onClick={() => handleActionClick('Started a new project draft.', 'success')}>
+            <NeoButton variant="secondary" onClick={() => handleActionClick('Opened the reports workspace.', 'info', 'reports_opened')}>Reports</NeoButton>
+            <NeoButton variant="primary" onClick={() => handleActionClick('Started a new project draft.', 'success', 'project_draft_started')}>
               <Plus size={16} />
               New Project
             </NeoButton>
@@ -249,7 +242,7 @@ function App() {
                 <motion.button
                   key={action.label}
                   whileHover={{ x: 4 }}
-                  onClick={() => handleActionClick(`${action.label} is ready for the next workflow step.`, 'info')}
+                  onClick={() => handleActionClick(`${action.label} is ready for the next workflow step.`, 'info', `${action.label.toLowerCase()}_quick_action_clicked`)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
@@ -268,7 +261,7 @@ function App() {
 
               <hr className="border-neutral-200 dark:border-neutral-700 my-2" />
 
-              <NeoButton variant="outline" className="w-full" onClick={() => handleActionClick('Opened the full action catalog.', 'info')}>
+              <NeoButton variant="outline" className="w-full" onClick={() => handleActionClick('Opened the full action catalog.', 'info', 'action_catalog_opened')}>
                 <Plus size={16} />
                 View All
               </NeoButton>

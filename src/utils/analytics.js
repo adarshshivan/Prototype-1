@@ -1,21 +1,32 @@
 // Simple analytics utility for tracking user interactions
+const isAnalyticsEnabled = import.meta.env.PROD || import.meta.env.VITE_ENABLE_ANALYTICS === 'true'
+
+const emitAnalyticsEvent = (eventName, payload = {}) => {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', eventName, payload)
+    }
+
+    if (import.meta.env.DEV) {
+        console.info(`[Analytics] ${eventName}`, payload)
+    }
+}
+
 export const analytics = {
     trackEvent: (eventName, eventData = {}) => {
-        if (process.env.NODE_ENV === 'production') {
-            console.log(`[Analytics] Event: ${eventName}`, eventData)
-            // Add your analytics service integration here
+        if (isAnalyticsEnabled) {
+            emitAnalyticsEvent(eventName, eventData)
         }
     },
 
     trackPageView: (pageName) => {
-        if (process.env.NODE_ENV === 'production') {
-            console.log(`[Analytics] Page View: ${pageName}`)
+        if (isAnalyticsEnabled) {
+            emitAnalyticsEvent('page_view', { page_name: pageName })
         }
     },
 
     trackUserAction: (action, metadata = {}) => {
-        if (process.env.NODE_ENV === 'production') {
-            console.log(`[Analytics] User Action: ${action}`, metadata)
+        if (isAnalyticsEnabled) {
+            emitAnalyticsEvent(action, metadata)
         }
     }
 }
