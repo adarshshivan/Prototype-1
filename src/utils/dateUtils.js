@@ -1,6 +1,13 @@
 // Date and time utilities
+const parseDate = (value) => {
+    const parsed = new Date(value)
+    return Number.isNaN(parsed.getTime()) ? null : parsed
+}
+
 export const formatDate = (date, format = 'MMM DD, YYYY') => {
-    const d = new Date(date)
+    const d = parseDate(date)
+    if (!d) return 'Invalid date'
+
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -19,8 +26,14 @@ export const formatDate = (date, format = 'MMM DD, YYYY') => {
 }
 
 export const getRelativeTime = (date) => {
+    const target = parseDate(date)
+    if (!target) return 'invalid date'
+
     const now = new Date()
-    const diffMs = now - new Date(date)
+    const diffMs = now - target
+
+    if (diffMs < 0) return 'in the future'
+
     const diffMins = Math.floor(diffMs / 60000)
     const diffHours = Math.floor(diffMs / 3600000)
     const diffDays = Math.floor(diffMs / 86400000)
@@ -30,11 +43,30 @@ export const getRelativeTime = (date) => {
     if (diffHours < 24) return `${diffHours}h ago`
     if (diffDays < 7) return `${diffDays}d ago`
 
-    return formatDate(date, 'MMM DD')
+    return formatDate(target, 'MMM DD')
 }
 
 export const isToday = (date) => {
+    const d = parseDate(date)
+    if (!d) return false
+
     const today = new Date()
-    const d = new Date(date)
     return d.toDateString() === today.toDateString()
+}
+
+export const isThisWeek = (date) => {
+    const d = parseDate(date)
+    if (!d) return false
+
+    const now = new Date()
+    const dayOfWeek = (now.getDay() + 6) % 7
+
+    const weekStart = new Date(now)
+    weekStart.setDate(now.getDate() - dayOfWeek)
+    weekStart.setHours(0, 0, 0, 0)
+
+    const weekEnd = new Date(weekStart)
+    weekEnd.setDate(weekStart.getDate() + 7)
+
+    return d >= weekStart && d < weekEnd
 }
