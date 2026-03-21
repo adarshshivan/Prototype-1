@@ -10,6 +10,7 @@ export function useAsync(asyncFunction, immediate = true) {
     const [status, setStatus] = useState('idle')
     const [result, setResult] = useState(null)
     const [error, setError] = useState(null)
+    const [lastUpdated, setLastUpdated] = useState(null)
     const isMountedRef = useRef(true)
 
     useEffect(() => {
@@ -20,13 +21,13 @@ export function useAsync(asyncFunction, immediate = true) {
         }
     }, [])
 
-    const execute = useCallback(async () => {
+    const execute = useCallback(async (...args) => {
         setStatus('pending')
         setResult(null)
         setError(null)
 
         try {
-            const response = await asyncFunction()
+            const response = await asyncFunction(...args)
 
             if (!isMountedRef.current) {
                 return response
@@ -34,6 +35,7 @@ export function useAsync(asyncFunction, immediate = true) {
 
             setResult(response)
             setStatus('success')
+            setLastUpdated(Date.now())
             return response
         } catch (err) {
             if (!isMountedRef.current) {
@@ -54,6 +56,7 @@ export function useAsync(asyncFunction, immediate = true) {
         setStatus('idle')
         setResult(null)
         setError(null)
+        setLastUpdated(null)
     }, [])
 
     useEffect(() => {
@@ -64,5 +67,5 @@ export function useAsync(asyncFunction, immediate = true) {
         }
     }, [execute, immediate])
 
-    return { status, result, error, execute, reset }
+    return { status, result, error, lastUpdated, execute, reset }
 }
