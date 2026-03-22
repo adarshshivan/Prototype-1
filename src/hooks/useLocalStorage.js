@@ -23,14 +23,35 @@ export function useLocalStorage(key, initialValue) {
 
     const setValue = (value) => {
         try {
-            const valueToStore = value instanceof Function ? value(readValue()) : value
-            setStoredValue(valueToStore)
+            setStoredValue((currentValue) => {
+                const valueToStore = value instanceof Function ? value(currentValue) : value
+
+                if (typeof window !== 'undefined') {
+                    window.localStorage.setItem(key, JSON.stringify(valueToStore))
+                }
+
+                return valueToStore
+            })
 
             if (typeof window !== 'undefined') {
-                window.localStorage.setItem(key, JSON.stringify(valueToStore))
+                window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }))
             }
         } catch (error) {
             console.error(`Error setting localStorage key "${key}":`, error)
+        }
+    }
+
+    const removeValue = () => {
+        try {
+            const fallbackValue = initialValue instanceof Function ? initialValue() : initialValue
+            setStoredValue(fallbackValue)
+
+            if (typeof window !== 'undefined') {
+                window.localStorage.removeItem(key)
+                window.dispatchEvent(new CustomEvent('local-storage', { detail: { key } }))
+            }
+        } catch (error) {
+            console.error(`Error removing localStorage key "${key}":`, error)
         }
     }
 
@@ -52,13 +73,23 @@ export function useLocalStorage(key, initialValue) {
             setStoredValue(readValue())
         }
 
+        const handleCustomStorageEvent = (event) => {
+            if (event.detail?.key && event.detail.key !== key) {
+                return
+            }
+
+            setStoredValue(readValue())
+        }
+
         window.addEventListener('storage', handleStorageChange)
+        window.addEventListener('local-storage', handleCustomStorageEvent)
 
         return () => {
             window.removeEventListener('storage', handleStorageChange)
+            window.removeEventListener('local-storage', handleCustomStorageEvent)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [key])
 
-    return [storedValue, setValue]
+    return [storedValue, setValue, removeValue]
 }
