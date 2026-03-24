@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
 
 const NotificationContext = createContext()
+const MAX_NOTIFICATIONS = 5
 
 export function NotificationProvider({ children }) {
     const [notifications, setNotifications] = useState([])
@@ -11,10 +12,13 @@ export function NotificationProvider({ children }) {
     }, [])
 
     const addNotification = useCallback((message, type = 'info', duration = 3000) => {
-        const id = Date.now()
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
         const notification = { id, message, type }
 
-        setNotifications((prev) => [...prev, notification])
+        setNotifications((prev) => {
+            const nextNotifications = [...prev, notification]
+            return nextNotifications.slice(-MAX_NOTIFICATIONS)
+        })
 
         if (duration > 0) {
             setTimeout(() => {
