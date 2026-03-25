@@ -24,6 +24,13 @@ const SearchBar = ({ value: controlledValue, onSearch, placeholder = 'Search...'
         onClear?.()
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape' && value) {
+            event.preventDefault()
+            handleClear()
+        }
+    }
+
     return (
         <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 pointer-events-none" size={18} />
@@ -35,6 +42,7 @@ const SearchBar = ({ value: controlledValue, onSearch, placeholder = 'Search...'
                 className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-transparent focus:border-neutral-300 dark:focus:border-neutral-600 outline-none transition-colors"
                 aria-label="Search"
                 autoFocus={autoFocus}
+                onKeyDown={handleKeyDown}
             />
             {value && (
                 <motion.button
