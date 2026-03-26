@@ -7,7 +7,6 @@ export function useDebounce(value, delay = 500, options = {}) {
 
     useEffect(() => {
         if (leading && isFirstRun.current) {
-            setDebouncedValue(value)
             isFirstRun.current = false
             return undefined
         }
