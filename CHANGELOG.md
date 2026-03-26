@@ -2,6 +2,22 @@
 
 All notable changes to the Modern Dashboard Portfolio project will be documented in this file.
 
+## [Daily Improvements] - March 26, 2026
+
+### Added
+- `isThisWeek` helper in date utilities for week-based UI checks.
+- Custom-event synchronization and `removeValue` support in `useLocalStorage`.
+
+### Changed
+- Hardened date utilities for invalid/future date handling.
+- Improved string and array utility guards for edge cases.
+- Expanded form validation with custom messages, pattern, and custom rule support.
+- Enhanced analytics with payload sanitization and an in-memory event queue fallback.
+- Extended `useDebounce` and `useAsync` hooks for better async ergonomics.
+- Added SSR guards/system-theme sync in `ThemeContext`.
+- Capped notification queue size and switched to collision-resistant notification IDs.
+- Added `Escape` keyboard clear behavior in `SearchBar`.
+
 ## [Maintenance] - February 14, 2026
 
 ### Changed
