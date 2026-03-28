@@ -120,3 +120,4 @@ npm run preview  # Preview production build
 ---
 
 **Last Updated**: February 14, 2026
+- 2026-03-28: Docs: clarify project purpose and quick start (2026-03-28)
