@@ -123,3 +123,4 @@ npm run preview  # Preview production build
 - 2026-03-28: Docs: clarify project purpose and quick start (2026-03-28)
 - 2026-03-29: Docs: add usage example and command snippet (2026-03-29)
 - 2026-03-30: Docs: add contribution guidelines skeleton (2026-03-30)
+- 2026-03-31: Refactor: add JSDoc to a small utility function (2026-03-31)
