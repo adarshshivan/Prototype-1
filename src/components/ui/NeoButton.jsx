@@ -17,7 +17,7 @@ const NeoButton = ({ children, variant = 'primary', className = '', disabled = f
             whileTap={!disabled ? { scale: 0.96 } : {}}
             className={`${baseStyles} ${selectedVariant} ${className}`}
             disabled={disabled}
-            aria-label={ariaLabel}
+            aria-label={ariaLabel || (typeof children === 'string' ? children : undefined)}
             {...props}
         >
             {children}
