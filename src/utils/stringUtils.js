@@ -40,6 +40,11 @@ export const formatBytes = (bytes, decimals = 2) => {
 }
 
 export const generateId = (prefix = 'id') => {
+    /**
+     * Generate a compact unique id using timestamp + random suffix.
+     * Falls back to Math.random() when crypto.randomUUID is not available.
+     * Example: `id_1616161616161_a1b2c3d4e5f6`
+     */
     const randomPart = globalThis.crypto?.randomUUID
         ? globalThis.crypto.randomUUID().replace(/-/g, '').slice(0, 12)
         : Math.random().toString(36).slice(2, 14)
