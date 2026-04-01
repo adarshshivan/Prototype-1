@@ -27,7 +27,7 @@ export const formatDate = (date, format = 'MMM DD, YYYY') => {
 
 export const getRelativeTime = (date) => {
     const target = parseDate(date)
-    if (!target) return 'invalid date'
+    if (!target) return 'Invalid date'
 
     const now = new Date()
     const diffMs = now - target
